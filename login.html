@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f7ecf5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+    <div style="background-color: rgb(250, 241, 248); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 300px;">
+        <h2 style="text-align: center; margin-bottom: 20px;"   >Login</h2>
+        <form method="POST" action="{{ url_for('login') }}" style="display: flex; flex-direction: column;">
+            <label for="username" style="margin-bottom: 5px;">Username:</label>
+            <input type="text" id="username" name="username" required style="padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px;"><br>
+            <label for="password" style="margin-bottom: 5px;">Password:</label>
+            <input type="password" id="password" name="password" required style="padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px;"><br>
+            <input type="submit" value="Login" style="padding: 10px; background-color: #ebd7e8; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+        </form>
+        <a href="{{ url_for('register') }}" style="text-align: center; display: block; margin-top: 10px; color: #111111;">Don't have an account? Register here</a>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul style="color: rgb(180, 150, 235); list-style: none; padding: 0;">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

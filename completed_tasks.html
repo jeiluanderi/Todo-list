@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Tasks</title>
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            color: black;
+            background-color: #f3e7ed;
+            margin: 50px;
+            padding: 50px;
+        }
+
+        .back-link {
+            font-family: 'Courier New', Courier, monospace;
+            text-decoration: none;
+            color: #996d8d;
+            font-size: 18px;
+        }
+
+        .back-link:hover {
+            color: #a0688d;
+        }
+
+        .back-icon {
+            margin-right: 8px;
+        }
+
+        h1 {
+            background-color: #f5ecf2;
+            color: rgb(19, 18, 18);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #ebd1e3;
+            color: rgb(8, 8, 8);
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="back-link">
+        <i class="fas fa-arrow-left back-icon"> Home</i>
+    </a>
+    <h1>Completed Tasks</h1>
+    <ul>
+        {% for todo in todo_list %}
+            <li>{{ todo.title }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

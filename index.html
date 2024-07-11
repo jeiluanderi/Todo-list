@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            color: black;
+            background-color: #f3e7ed;
+            margin: 50px;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #faeef7;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        form label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        form input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        form button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .todo-item {
+            background-color: #f3d6e6;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .todo-item p {
+            margin: 5px 0;
+        }
+        .todo-item span {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .todo-item .complete, .todo-item .uncomplete, .todo-item .update, .todo-item .delete {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background-color: #ddd;
+            transition: background-color 0.3s ease;
+        }
+        .todo-item .complete:hover, .todo-item .uncomplete:hover, .todo-item .update:hover, .todo-item .delete:hover {
+            background-color: #ccc;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            padding: 10px 15px;
+            border-radius: 4px;
+            background-color: #f3eff3;
+            transition: background-color 0.3s ease;
+        }
+        .back-link:hover {
+            background-color: #ccc;
+        }
+        .back-icon {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+       
+        <form action="/add" method="post">
+            <label for="title">Todo Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter a new to-do item">
+            <button type="submit">Add</button>
+        </form>
+
+        {% for todo in todo_list %}
+            <div class="todo-item">
+                <p>{{ todo.id }}: {{ todo.title }}</p>
+                {% if not todo.complete %}
+                    <span style="background-color: #e74c3c; color: white;">✗</span>
+                    <a href="/complete/{{ todo.id }}" class="complete">Complete</a>
+                {% else %}
+                    <span style="background-color: #2ecc71; color: white;">✓</span>
+                    <a href="/uncomplete/{{ todo.id }}" class="uncomplete">Uncomplete</a>
+                {% endif %}
+                <a href="/update/{{ todo.id }}" class="update">Update</a>
+                <a href="/delete/{{ todo.id }}" class="delete">Delete</a>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="{{ url_for('completed_tasks') }}" class="back-link">
+        <i class="fas fa-check back-icon"></i>Completed Tasks </a>
+</body>
+</html>

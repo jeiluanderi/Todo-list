@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #eecee2; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+    <div style="background-color: rgb(248, 217, 247); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 300px;">
+        <h2 style="text-align: center; margin-bottom: 20px;">Register</h2>
+        <form method="POST" action="{{ url_for('register') }}" style="display: flex; flex-direction: column;">
+            <label for="username" style="margin-bottom: 5px;">Username:</label>
+            <input type="text" id="username" name="username" required style="padding: 10px; margin-bottom: 20px; border: 1px solid #e0a5dd; border-radius: 5px;"><br>
+            <label for="password" style="margin-bottom: 5px;       ">Password:</label>
+            <input type="password" id="password" name="password" required style="padding: 10px; margin-bottom: 20px; border: 1px solid #e0a5dd; border-radius: 5px;"><br>
+            <input type="submit" value="Register" style="padding: 10px; background-color: #e0bbd7; color: rgb(109, 100, 107); border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+        </form>
+        <a href="{{ url_for('login') }}" style="text-align: center; display: block; margin-top: 10px; color: #534853;">Already have an account? Login here</a>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul style="color: rgb(197, 103, 209); list-style: none; padding: 0;">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
